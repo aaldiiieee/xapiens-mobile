@@ -6,6 +6,15 @@ This project is a **React Native application** built using **Expo Router**. It d
 
 ## **Features**
 
+- **Login Page**:
+  - Authenticates users using the **POST /login** endpoint from Reqres API.
+  - Displays success or error messages based on the API response.
+  - Stores a token on successful login.
+
+- **Sample Credentials**:
+  - Email: `eve.holt@reqres.in`
+  - Password: `cityslicka`
+
 - **List View**: 
   - Infinite scroll to fetch users dynamically.
   - Displays user details such as avatar, name, and email.
