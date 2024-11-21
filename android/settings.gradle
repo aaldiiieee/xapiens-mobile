@@ -21,7 +21,7 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
   }
 }
 
-rootProject.name = 'xapiensmobiletest'
+rootProject.name = 'xapiens-mobile-test'
 
 dependencyResolutionManagement {
   versionCatalogs {
