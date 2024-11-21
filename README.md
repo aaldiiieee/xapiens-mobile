@@ -44,3 +44,12 @@ This project is a **React Native application** built using **Expo Router**. It d
    ```bash
    git clone https://github.com/your-username/your-repository-name.git
    cd your-repository-name
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the Expo development server:
+   ```bash
+   npm run start
+   ```
