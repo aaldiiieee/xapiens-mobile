@@ -12,6 +12,22 @@ export default function TabLayout() {
   const colorScheme = useColorScheme();
   const router = useRouter();
 
+  // const handleLogout = async () => {
+  //   Alert.alert('Confirm Logout', 'Are you sure you want to logout?', [
+  //     {
+  //       text: 'Cancel',
+  //       style: 'cancel',
+  //     },
+  //     {
+  //       text: 'Logout',
+  //       onPress: async () => {
+  //         await AsyncStorage.removeItem('authToken');
+  //         router.replace('/login');
+  //       },
+  //     },
+  //   ]);
+  // };
+
   const handleLogout = async () => {
     Alert.alert('Confirm Logout', 'Are you sure you want to logout?', [
       {
@@ -21,12 +37,28 @@ export default function TabLayout() {
       {
         text: 'Logout',
         onPress: async () => {
-          await AsyncStorage.removeItem('authToken');
-          router.replace('/login');
+          try {
+            const token = await AsyncStorage.getItem('authToken');
+            if (token) {
+              // Revoke Google OAuth session
+              await fetch(`https://accounts.google.com/o/oauth2/revoke?token=${token}`);
+            }
+  
+            // Clear AsyncStorage
+            await AsyncStorage.removeItem('authToken');
+            await AsyncStorage.removeItem('@user');
+  
+            // Redirect to login
+            router.replace('/login');
+          } catch (error) {
+            console.error('Logout Error:', error);
+            Alert.alert('Error', 'Failed to logout. Please try again.');
+          }
         },
       },
     ]);
   };
+  
 
   useEffect(() => {
     const checkAuth = async () => {
