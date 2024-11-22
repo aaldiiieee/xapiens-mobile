@@ -1,5 +1,5 @@
 import { Stack } from 'expo-router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { TouchableOpacity, Text, Alert } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
@@ -7,6 +7,8 @@ import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function TabLayout() {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+
   const colorScheme = useColorScheme();
   const router = useRouter();
 
@@ -25,6 +27,21 @@ export default function TabLayout() {
       },
     ]);
   };
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token = await AsyncStorage.getItem('authToken');
+      setIsAuthenticated(!!token);
+
+      if (!token) router.replace('/login');
+    };
+
+    checkAuth();
+  }, []);
+
+  if (isAuthenticated === null) {
+    return null;
+  }
 
   return (
     <Stack
