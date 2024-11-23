@@ -14,6 +14,9 @@ This project is a **React Native application** built using **Expo Router**. It d
 - **Sample Credentials**:
   - Email: `eve.holt@reqres.in`
   - Password: `cityslicka`
+ 
+- **Login OAuth**:
+  - Development Only
 
 - **List View**: 
   - Infinite scroll to fetch users dynamically.
