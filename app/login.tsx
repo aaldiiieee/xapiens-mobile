@@ -49,8 +49,6 @@ export default function LoginScreen() {
     }),
   });
 
-  console.log(userInfo);
-
   useEffect(() => {
     handleLoginWithGoogle();
   }, [response]);
