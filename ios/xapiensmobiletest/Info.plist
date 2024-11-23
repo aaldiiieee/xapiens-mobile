@@ -27,8 +27,14 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>myapp</string>
+          <string>xapiens-mobile-test</string>
           <string>com.aaldiiieee.dev.xapiensmobiletest</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>exp+xapiens-mobile-test</string>
         </array>
       </dict>
     </array>

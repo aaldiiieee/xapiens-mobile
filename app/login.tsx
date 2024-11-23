@@ -7,7 +7,6 @@ import {
   View,
   Text,
   TextInput,
-  TouchableOpacity,
   StyleSheet,
   Alert,
 } from "react-native";
@@ -15,6 +14,8 @@ import { useRouter } from "expo-router";
 import callReqResAPI from "@/api/callReqResAPI";
 import * as WebBrowser from "expo-web-browser";
 import * as Google from "expo-auth-session/providers/google";
+
+import ButtonSubmit from "@/components/ui/ButtonSubmit";
 
 interface LoginPayload {
   email: string;
@@ -34,8 +35,7 @@ export default function LoginScreen() {
   const [loading, setLoading] = useState<boolean>(false);
   const [userInfo, setUserInfo] = useState(null);
 
-  console.log("userInfo", userInfo);
-
+  // Google OAuth
   const [request, response, promptAsync] = Google.useAuthRequest({
     iosClientId:
       "459053274171-00gr631nvss49hpbvui6kvi916heojfq.apps.googleusercontent.com",
@@ -46,9 +46,10 @@ export default function LoginScreen() {
     redirectUri: Platform.select({
       ios: "com.aaldiiieee.dev.xapiensmobiletest:/oauthredirect",
       android: "com.aaldiiieee.dev.xapiensmobiletest:/oauthredirect",
-      web: "https://auth.expo.io/@aaldiiieee.dev/xapiens-mobile-test",
     }),
   });
+
+  console.log(userInfo);
 
   useEffect(() => {
     handleLoginWithGoogle();
@@ -131,6 +132,7 @@ export default function LoginScreen() {
         keyboardType="email-address"
         autoCapitalize="none"
       />
+
       <TextInput
         placeholder="Password"
         value={password}
@@ -138,26 +140,24 @@ export default function LoginScreen() {
         style={styles.input}
         secureTextEntry
       />
-      <TouchableOpacity
-        style={styles.button}
+
+      <ButtonSubmit
+        loading={loading}
+        text="Login"
         onPress={handleLogin}
-        disabled={loading}
-      >
-        <Text style={styles.buttonText}>
-          {loading ? "Logging in..." : "Login"}
-        </Text>
-      </TouchableOpacity>
+        textStyle={{ color: "white" }}
+      />
+
       <Text style={styles.orText}>Or</Text>
-      <TouchableOpacity
-        style={styles.buttonLoginGoogle}
+
+      <ButtonSubmit
+        loading={false}
+        text="Login With Google"
         onPress={() => promptAsync()}
-        disabled={loading}
+        buttonStyle={styles.buttonLoginGoogle}
       >
         <FontAwesome name="google" size={20} />
-        <Text style={styles.buttonGoogleText}>
-          {loading ? "Logging in..." : "Login With Google"}
-        </Text>
-      </TouchableOpacity>
+      </ButtonSubmit>
     </View>
   );
 }
@@ -169,11 +169,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
   },
+
   title: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
   },
+
   input: {
     width: "100%",
     padding: 15,
@@ -181,42 +183,21 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 15,
   },
-  button: {
-    backgroundColor: "#007BFF",
-    padding: 15,
-    borderRadius: 5,
-    width: "100%",
-    alignItems: "center",
-  },
-  buttonText: {
-    color: "#FFF",
-    fontWeight: "bold",
-  },
+
   link: {
     marginTop: 10,
     color: "#007BFF",
   },
+
   buttonLoginGoogle: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "#FFF",
-    borderWidth: 1,
-    borderColor: "#DDDDDD",
-    borderRadius: 5,
-    padding: 15,
     gap: 10,
     width: "100%",
-    justifyContent: "center",
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 3,
   },
-  buttonGoogleText: {
-    color: "#000",
-    fontWeight: "500",
-  },
+
   orText: {
     marginVertical: 15,
     fontSize: 16,

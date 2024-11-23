@@ -24,8 +24,9 @@
         <action android:name="android.intent.action.VIEW"/>
         <category android:name="android.intent.category.DEFAULT"/>
         <category android:name="android.intent.category.BROWSABLE"/>
-        <data android:scheme="myapp"/>
+        <data android:scheme="xapiens-mobile-test"/>
         <data android:scheme="com.aaldiiieee.dev.xapiensmobiletest"/>
+        <data android:scheme="exp+xapiens-mobile-test"/>
       </intent-filter>
     </activity>
   </application>
