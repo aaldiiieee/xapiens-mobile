@@ -5,6 +5,7 @@ import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SplashScreen from 'expo-splash-screen';
 
 export default function TabLayout() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
@@ -54,7 +55,7 @@ export default function TabLayout() {
   }, []);
 
   if (isAuthenticated === null) {
-    return null;
+    SplashScreen.hideAsync();
   }
 
   return (

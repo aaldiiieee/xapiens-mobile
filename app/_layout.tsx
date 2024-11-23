@@ -28,13 +28,13 @@ export default function RootLayout() {
 
 
   return (
-    <React.Fragment>
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
         <Stack.Screen name="login" options={{ headerShown: false }} />
         <Stack.Screen name="(app)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />
-    </React.Fragment>
+    </ThemeProvider>
   );
 }

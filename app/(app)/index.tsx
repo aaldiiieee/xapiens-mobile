@@ -7,13 +7,13 @@ import {
   Image,
   ActivityIndicator,
   TouchableOpacity,
-  Button,
   ScrollView,
 } from "react-native";
 import { DataTable } from "react-native-paper";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import callReqResAPI from "@/api/callReqResAPI";
 import { useRouter } from "expo-router";
+import ButtonSubmit from "@/components/ui/ButtonSubmit";
 
 interface User {
   id: number;
@@ -84,12 +84,19 @@ const HomeScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Button
-        title={isTableView ? "Switch to List View" : "Switch to Table View"}
+
+      <ButtonSubmit
+        loading={loading}
         onPress={toggleView}
+        textStyle={{ color: "white" }}
+        buttonStyle={{ marginBottom: "8%" }}
+        text={isTableView ? "Switch to List View" : "Switch to Table View"}
       />
+
       {loading && !loadingMore ? (
-        <ActivityIndicator size="large" color="#0000ff" />
+        <View style={styles.loader}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
       ) : isTableView ? (
         <ScrollView horizontal showsHorizontalScrollIndicator>
           <DataTable style={styles.dataTable}>
@@ -166,7 +173,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   dataTable: {
-    minWidth: 600,
+    width: 860,
   },
   avatar: {
     width: 40,
@@ -200,6 +207,12 @@ const styles = StyleSheet.create({
   },
   email: {
     color: "#555",
+  },
+  loader: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 20,
   },
 });
 
