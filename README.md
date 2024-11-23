@@ -17,6 +17,19 @@ This project is a **React Native application** built using **Expo Router**. It d
  
 - **Login OAuth**:
   - Development Only
+        
+      1. Install expo-dev-client:
+         ```bash
+         npx expo install expo-dev-client
+         ```
+      2. Create a build for the device:
+         ```bash
+         eas build --profile development --platform android
+         ```
+          If you haven't installed eas:
+         ```bash
+         npm install -g eas-cli
+         ```
 
 - **List View**: 
   - Infinite scroll to fetch users dynamically.
