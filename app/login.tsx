@@ -72,6 +72,7 @@ export default function LoginScreen() {
       await AsyncStorage.setItem("authToken", token);
 
       Alert.alert("Login Successful", "You are now logged in.");
+      router.push("/(app)");
     } catch (error: any) {
       console.error("Login Error:", error);
       Alert.alert("Login Failed", error?.error || "Invalid credentials.");
