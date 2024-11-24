@@ -5,10 +5,10 @@ import {
   Image,
   StyleSheet,
   ActivityIndicator,
-  Button,
 } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import callReqResAPI from "@/api/callReqResAPI";
+import ButtonSubmit from "@/components/ui/ButtonSubmit";
 
 interface User {
   id: number;
@@ -57,7 +57,7 @@ const DetailPage: React.FC = () => {
     return (
       <View style={styles.center}>
         <Text style={styles.errorText}>User not found</Text>
-        <Button title="Go Back" onPress={() => router.back()} />
+        <ButtonSubmit text="Go Back" textStyle={{ color: "#fff" }} loading={false} onPress={() => router.back()} />
       </View>
     );
   }
@@ -69,7 +69,7 @@ const DetailPage: React.FC = () => {
         Hello, my name is {user.first_name} {user.last_name}
       </Text>
       <Text style={styles.email}>{user.email}</Text>
-      <Button title="Go Back" onPress={() => router.back()} />
+      <ButtonSubmit text="Go Back" loading={false} textStyle={{ color: "#fff" }} onPress={() => router.back()} />
     </View>
   );
 };
@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 10,
+    textAlign: "center",
   },
   email: {
     fontSize: 18,
